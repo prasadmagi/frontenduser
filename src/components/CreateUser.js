@@ -5,6 +5,7 @@ import { popUp } from "../Helper";
 export const CreateUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
+  const [role, setrole] = useState(false);
   const handlesubmit = (e) => {
     debugger;
     e.preventDefault();
@@ -15,10 +16,11 @@ export const CreateUser = () => {
 
   const createApiCall = async () => {
     debugger;
-    let url =  window.REACT_APP_URL+"createUser";
+    let url = window.REACT_APP_URL + "createUser";
     let input = {
       name: name,
       password: password,
+      role: role
     };
     let response = await axios.post(url, input);
 
@@ -26,20 +28,20 @@ export const CreateUser = () => {
 
     console.log(result, "createUser");
 
-    if(result.msgId === -1) {
-           popUp({message:result.message, icons:"error", title:"Error"}).then((event)=>{
-            if(event.isConfirmed) {
+    if (result.msgId === -1) {
+      popUp({ message: result.message, icons: "error", title: "Error" }).then((event) => {
+        if (event.isConfirmed) {
 
-            }
-            return 
-           }) 
-    }else if(result.msgId === 0) {
-        popUp({message:result.message, icons:"success", title:"Success"}).then((event)=>{
-            if(event.isConfirmed) {
+        }
+        return
+      })
+    } else if (result.msgId === 0) {
+      popUp({ message: result.message, icons: "success", title: "Success" }).then((event) => {
+        if (event.isConfirmed) {
 
-            }
-            return 
-           })     
+        }
+        return
+      })
     }
   };
   return (
@@ -57,6 +59,13 @@ export const CreateUser = () => {
           onChange={(e) => setpassword(e.target.value)}
           placeholder="Enter Name"
         />
+        <label>
+          Role As Admin:
+          <select name="role" defaultValue={"false"} value={role}>
+            <option value={"true"}>True</option>
+            <option value={"False"}>False</option>
+          </select>
+        </label>
         <input type="Submit" value={"Submit"} />
       </form>
     </div>

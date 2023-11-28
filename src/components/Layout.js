@@ -16,6 +16,9 @@ export const Layout = () => {
             <Link to="/LoginUser">LoginUser</Link>
           </li>
           <li>
+            <li>
+              <Link to="/DeleteUser">DeleteUser</Link>
+            </li>
             <Link to="/Logout">Logout</Link>
           </li>
         </ul>
