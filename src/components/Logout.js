@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { popUp } from '../Helper'
+import { Loading } from './Loading'
 
 export const Logout = () => {
+    const [isLoading, setisLoading] = useState(false)
     const handleSubmit = ()=>{
         debugger
-
+        setisLoading(true)
         localStorage.clear("token")
 
         let token = localStorage.getItem("token")
@@ -24,8 +26,17 @@ export const Logout = () => {
 
   return (
     <div>
-        <h2>Logout</h2>
-        <button onClick={handleSubmit}>Logout</button>
+        {
+            isLoading ? (
+                <Loading/>
+            ): (
+                <div>
+
+                    <h2>Logout</h2>
+                    <button onClick={handleSubmit}>Logout</button>
+                </div> 
+            )
+        }
     </div>
   )
 }
