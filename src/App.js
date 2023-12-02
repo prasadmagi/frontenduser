@@ -7,6 +7,8 @@ import { LoginUser } from './components/LoginUser';
 import { Layout } from './components/Layout';
 import { Logout } from './components/Logout';
 import { DeleteUser } from './components/DeleteUser';
+import { Private } from './components/Private';
+import { Protected } from './components/Protected';
 
 
 
@@ -29,6 +31,7 @@ function App() {
             <Route path="LoginUser" element={<LoginUser />} />
             <Route path="DeleteUser" element={<DeleteUser />} />
             <Route path="Logout" element={<Logout />} />
+            <Route path="Private" element={< Protected Component={Private} />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>

@@ -3,17 +3,20 @@ import React, { useState } from "react";
 import { popUp } from "../Helper";
 import { PostService } from "../util/Services";
 import { Loading } from "./Loading";
+import { useNavigate } from "react-router-dom";
 
 export const LoginUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
+  const navigate = useNavigate()
+  let token = localStorage.getItem("token");
   const handlesubmit = (e) => {
     setisloading(true);
     debugger;
     e.preventDefault();
 
-    let token = localStorage.getItem("token");
+    
 
     if (token) {
       popUp({
@@ -61,6 +64,7 @@ export const LoginUser = () => {
             title: "Success",
           }).then((event) => {
             if (event.isConfirmed) {
+              navigate("/Private",{state:name})
             }
             return;
           });
@@ -79,6 +83,12 @@ export const LoginUser = () => {
 
   return (
     <div>
+      {
+        token ? (
+          <div> User login Already </div>
+        ):
+   (
+    <>
       <h2> Login User</h2>
       {isloading ? (
         <Loading />
@@ -97,6 +107,9 @@ export const LoginUser = () => {
           <input type="Submit" value={"Submit"} />
         </form>
       )}
+      </>
+   )
+      }
     </div>
   );
 };

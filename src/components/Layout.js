@@ -15,12 +15,16 @@ export const Layout = () => {
           <li>
             <Link to="/LoginUser">LoginUser</Link>
           </li>
-          <li>
+        
             <li>
               <Link to="/DeleteUser">DeleteUser</Link>
             </li>
+            <li>
             <Link to="/Logout">Logout</Link>
-          </li>
+            </li>
+            <li>
+            <Link to="/Private">Private Page</Link>
+            </li>
         </ul>
       </nav>
 
