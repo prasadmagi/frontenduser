@@ -4,32 +4,47 @@ import { popUp } from "../Helper";
 import { PostService } from "../util/Services";
 import { Loading } from "./Loading";
 import { useNavigate } from "react-router-dom";
+import { Button, Grid, TextField } from "@mui/material";
 
 export const LoginUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   let token = localStorage.getItem("token");
   const handlesubmit = (e) => {
     setisloading(true);
     debugger;
     e.preventDefault();
-
-    
-
-    if (token) {
+    if (!(name && password)) {
       popUp({
-        message: "User Already Login",
+        message: "Please Enter All Value",
         icons: "error",
         title: "Error",
       }).then((event) => {
         if (event.isConfirmed) {
+          setname("");
+          setpassword("");
         }
+        setisloading(false);
         return;
       });
-    } else {
-      loginApiCall();
+      return 
+    }else {
+
+      if (token) {
+        popUp({
+          message: "User Already Login",
+          icons: "error",
+          title: "Error",
+        }).then((event) => {
+          if (event.isConfirmed) {
+          }
+          return;
+        });
+      } else {
+        loginApiCall();
+      }
     }
   };
 
@@ -64,7 +79,7 @@ export const LoginUser = () => {
             title: "Success",
           }).then((event) => {
             if (event.isConfirmed) {
-              navigate("/Private",{state:name})
+              navigate("/Private", { state: name });
             }
             return;
           });
@@ -82,7 +97,8 @@ export const LoginUser = () => {
   };
 
   return (
-    <div>
+    <>
+      {/* <div>
       {
         token ? (
           <div> User login Already </div>
@@ -110,6 +126,57 @@ export const LoginUser = () => {
       </>
    )
       }
-    </div>
+    </div> */}
+      {isloading ? (
+        <Loading />
+      ) : (
+        <>
+          <Grid
+            container
+            spacing={3}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ minHeight: "100vh" }}
+          >
+            {/* <Grid item spacing={3}> */}
+              <Grid container item direction="column" justify="center" spacing={2}>
+                <Grid item spacing={2} xs={8} >
+                  <TextField
+                    value={name}
+                    onChange={(e) => setname(e.target.value)}
+                    type="name"
+                    id="outlined-basic"
+                    label="Name"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item spacing={2} xs={6} >
+                  <TextField
+                    value={password}
+                    onChange={(e) => setpassword(e.target.value)}
+                    type="password"
+                    id="outlined-basic"
+                    label="Password"
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item spacing={2}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className="button-block"
+                    onClick={handlesubmit}
+                  >
+                    Submit
+                  </Button>
+                </Grid>
+              </Grid>
+            {/* </Grid> */}
+          </Grid>
+        </>
+      )}
+    </>
   );
 };
