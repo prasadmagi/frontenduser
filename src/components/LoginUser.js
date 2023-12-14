@@ -2,9 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { popUp } from "../Helper";
 import { PostService } from "../util/Services";
-import { Loading } from "./Loading";
 import { useNavigate } from "react-router-dom";
-import { Button, Grid, TextField } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 export const LoginUser = () => {
   const [name, setname] = useState("");
@@ -29,9 +34,8 @@ export const LoginUser = () => {
         setisloading(false);
         return;
       });
-      return 
-    }else {
-
+      return;
+    } else {
       if (token) {
         popUp({
           message: "User Already Login",
@@ -128,7 +132,16 @@ export const LoginUser = () => {
       }
     </div> */}
       {isloading ? (
-        <Loading />
+        <Grid
+          container
+          spacing={3}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ minHeight: "100vh" }}
+        >
+          <CircularProgress />
+        </Grid>
       ) : (
         <>
           <Grid
@@ -140,39 +153,48 @@ export const LoginUser = () => {
             sx={{ minHeight: "100vh" }}
           >
             {/* <Grid item spacing={3}> */}
-              <Grid container item direction="column" justify="center" spacing={2}>
-                <Grid item spacing={2} xs={8} >
-                  <TextField
-                    value={name}
-                    onChange={(e) => setname(e.target.value)}
-                    type="name"
-                    id="outlined-basic"
-                    label="Name"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item spacing={2} xs={6} >
-                  <TextField
-                    value={password}
-                    onChange={(e) => setpassword(e.target.value)}
-                    type="password"
-                    id="outlined-basic"
-                    label="Password"
-                    variant="outlined"
-                  />
-                </Grid>
-                <Grid item spacing={2}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    className="button-block"
-                    onClick={handlesubmit}
-                  >
-                    Submit
-                  </Button>
-                </Grid>
+            <Grid
+              container
+              item
+              direction="column"
+              justify="center"
+              spacing={2}
+            >
+              <Grid item spacing={2} xs={8}>
+                <Typography>Login User</Typography>
               </Grid>
+              <Grid item spacing={2} xs={8}>
+                <TextField
+                  value={name}
+                  onChange={(e) => setname(e.target.value)}
+                  type="name"
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item spacing={2} xs={6}>
+                <TextField
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                  type="password"
+                  id="outlined-basic"
+                  label="Password"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item spacing={2}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className="button-block"
+                  onClick={handlesubmit}
+                >
+                  Submit
+                </Button>
+              </Grid>
+            </Grid>
             {/* </Grid> */}
           </Grid>
         </>

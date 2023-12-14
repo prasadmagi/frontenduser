@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { popUp } from "../Helper";
-import { Loading } from "./Loading";
+import { CircularProgress } from "@mui/material";
 
 export const Logout = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -10,7 +10,7 @@ export const Logout = () => {
   
 
     let token = localStorage.getItem("token");
-
+    setisLoading(false)
     if (token) {
         localStorage.clear("token");
       popUp({
@@ -35,6 +35,8 @@ export const Logout = () => {
   return (
     <div>
       {
+        isLoading ?
+        (<CircularProgress/>) :
         <div>
           <h2>Logout</h2>
           <button onClick={handleSubmit}>Logout</button>

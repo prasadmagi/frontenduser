@@ -1,1 +1,1 @@
-var REACT_APP_URL = "https://user-api-y2rp.onrender.com/"
+var REACT_APP_URL = "https://user-api-y2rp.onrender.com/user/api/"

@@ -1,17 +1,26 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { popUp } from "../Helper";
-import { Loading } from "./Loading";
-
+import {
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 export const CreateUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
-  const [role, setrole] = useState(false);
+  const [role, setrole] = useState(null);
   const [isLoading, setisLoading] = useState(false);
   const handlesubmit = (e) => {
     debugger;
     e.preventDefault();
-    setisLoading(true)
+    setisLoading(true);
     debugger;
     createApiCall();
   };
@@ -27,7 +36,7 @@ export const CreateUser = () => {
     let response = await axios.post(url, input);
 
     let result = await response.data;
-    setisLoading(false)
+    setisLoading(false);
     console.log(result, "createUser");
 
     if (result.msgId === -1) {
@@ -50,8 +59,95 @@ export const CreateUser = () => {
       });
     }
   };
+
+  const handleChangeSelect = (e) => {
+    debugger;
+    let value = e.target.value;
+
+    if (value === 1) {
+      setrole(true);
+    } else {
+      setrole(false);
+    }
+  };
   return (
-    <div>
+    <>
+      {isLoading ? (
+        <Grid
+          container
+          spacing={3}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ minHeight: "100vh" }}
+        >
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <Grid
+          container
+          spacing={3}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ minHeight: "100vh" }}
+        >
+          <Grid container item direction="column" justify="center" spacing={2}>
+            <Grid item spacing={2} xs={8}>
+              <Typography>Create User</Typography>
+            </Grid>
+            <Grid item spacing={2} xs={8}>
+              <TextField
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+                type="name"
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item spacing={2} xs={8}>
+              <TextField
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
+                id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                type="password"
+              />
+            </Grid>
+            {/* <Grid item spacing={2} xs={8}> */}
+            <FormControl fullWidth>
+              <Grid item spacing={2} xs={8}>
+                {/* <InputLabel id="demo-simple-select-label">Role</InputLabel> */}
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={role}
+                  label="Role"
+                  onChange={handleChangeSelect}
+                >
+                  <MenuItem value={1}>Admin</MenuItem>
+                  <MenuItem value={2}>Normal</MenuItem>
+                </Select>
+              </Grid>
+            </FormControl>
+            {/* </Grid> */}
+            <Grid item spacing={2} xs={8}>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                className="button-block"
+                onClick={handlesubmit}
+              >
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      )}
+      {/* <div>
       <h2> User Create</h2>
       {isLoading ? (
         <Loading />
@@ -77,6 +173,7 @@ export const CreateUser = () => {
           <input type="Submit" value={"Submit"} />
         </form>
       )}
-    </div>
+    </div> */}
+    </>
   );
 };
