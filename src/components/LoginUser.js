@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext, createContext } from "react";
 import { popUp } from "../Helper";
 import { PostService } from "../util/Services";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +10,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import UserContext from "./UserContext";
 
 export const LoginUser = () => {
+  debugger;
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
   const navigate = useNavigate();
+  const data = useContext(UserContext)
   let token = localStorage.getItem("token");
+  // console.log(data.username,"check1");
+  // console.log(data.setusername,"check2");
   const handlesubmit = (e) => {
     setisloading(true);
     debugger;
@@ -59,6 +64,9 @@ export const LoginUser = () => {
       name: name,
       password: password,
     };
+    data.setusername(name)
+
+    console.log(data.user,"set");
     await PostService("loginUser", input)
       .then((resp) => {
         setisloading(false);
@@ -83,7 +91,7 @@ export const LoginUser = () => {
             title: "Success",
           }).then((event) => {
             if (event.isConfirmed) {
-              navigate("/Private", { state: name });
+              navigate("/Private");
             }
             return;
           });
@@ -102,35 +110,6 @@ export const LoginUser = () => {
 
   return (
     <>
-      {/* <div>
-      {
-        token ? (
-          <div> User login Already </div>
-        ):
-   (
-    <>
-      <h2> Login User</h2>
-      {isloading ? (
-        <Loading />
-      ) : (
-        <form onSubmit={handlesubmit}>
-          <input
-            value={name}
-            onChange={(e) => setname(e.target.value)}
-            placeholder="Enter Name"
-          />
-          <input
-            value={password}
-            onChange={(e) => setpassword(e.target.value)}
-            placeholder="Enter Password"
-          />
-          <input type="Submit" value={"Submit"} />
-        </form>
-      )}
-      </>
-   )
-      }
-    </div> */}
       {isloading ? (
         <Grid
           container

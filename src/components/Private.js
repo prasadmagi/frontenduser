@@ -1,17 +1,17 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import UserContext from "./UserContext";
 
 export const Private = (props) => {
   debugger;
   const [data, setdata] = useState("")
-  // console.log(props,"props");
-  // const [user, setuser] = useState("")
-  let user =  ""
+  const dataUser = useContext(UserContext)
   const location = useLocation();
   const handleSubmitData = ()=>{
     debugger
+    console.log(dataUser.username, "user");
     apicall()
   }
 
@@ -30,7 +30,7 @@ export const Private = (props) => {
   }
   return (
     <div>
-      <h2>Private Route with User Name : {location.user} </h2>
+      <h2>Private Route with User Name : {dataUser.username} </h2>
       <input value={data} onChange={(e)=>setdata(e.target.value)} placeholder="Add Data Here"/>
       <button onClick={handleSubmitData}>Submit</button>
     </div>
