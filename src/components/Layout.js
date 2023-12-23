@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -6,17 +6,14 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-// import MenuIcon from '@mui/icons-material/Menu';
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from '@mui/icons-material/Adb';
+import UserContext from "./UserContext";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 export const Layout = () => {
+  const {AuthToken }= useContext(UserContext)
+  console.log(AuthToken, "layouttoken");
   return (
     <>
       <AppBar position="static">
@@ -112,13 +109,12 @@ export const Layout = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    Test{" "}
+                    Test
                   </Typography>
                 </Link>
               </MenuItem>
               <MenuItem>
                 <Link to="/CreateUser">
-                  
                   <Typography
                     textAlign="center"
                     sx={{
@@ -128,14 +124,12 @@ export const Layout = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    
                     CreateUser
                   </Typography>
                 </Link>
               </MenuItem>
               <MenuItem>
                 <Link to="/LoginUser">
-                  
                   <Typography
                     textAlign="center"
                     sx={{
@@ -149,92 +143,92 @@ export const Layout = () => {
                   </Typography>
                 </Link>
               </MenuItem>
-              <MenuItem>
-                <Link to="/DeleteUser">
-                
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      my: 2,
-                      color: "white",
-                      display: "block",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    DeleteUser
-                  </Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/Private">
-                  
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      my: 2,
-                      color: "white",
-                      display: "block",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Private
-                  </Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/ChangeUserName">
-                
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      my: 2,
-                      color: "white",
-                      display: "block",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    ChangeUserName
-                  </Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/ChangePassword">
-                  
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      my: 2,
-                      color: "white",
-                      display: "block",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    ChangePassword
-                  </Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/Logout">
-                  
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      my: 2,
-                      color: "white",
-                      display: "block",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Logout
-                  </Typography>
-                </Link>
-              </MenuItem>
+              {AuthToken ? (
+                <>
+                  <MenuItem>
+                    <Link to="/DeleteUser">
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          my: 2,
+                          color: "white",
+                          display: "block",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        DeleteUser
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+
+                  <MenuItem>
+                    <Link to="/Private">
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          my: 2,
+                          color: "white",
+                          display: "block",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Private
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link to="/ChangeUserName">
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          my: 2,
+                          color: "white",
+                          display: "block",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        ChangeUserName
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link to="/ChangePassword">
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          my: 2,
+                          color: "white",
+                          display: "block",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        ChangePassword
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link to="/Logout">
+                      <Typography
+                        textAlign="center"
+                        sx={{
+                          my: 2,
+                          color: "white",
+                          display: "block",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Logout
+                      </Typography>
+                    </Link>
+                  </MenuItem>
+                </>
+              ) : null}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
                 </IconButton>
               </Tooltip>
               <Menu
@@ -253,11 +247,7 @@ export const Layout = () => {
                 // open={Boolean(anchorElUser)}
                 // onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+         
               </Menu>
             </Box>
           </Toolbar>

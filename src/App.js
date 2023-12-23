@@ -18,9 +18,9 @@ import UserContext from "./components/UserContext";
 
 function App() {
   const [user, setuser] = useState("");
-
+  let token = localStorage.getItem('token')
   return (
-    <UserContext.Provider value={{username:user, setusername:setuser}}>
+    <UserContext.Provider value={{username:user, setusername:setuser, AuthToken: token}}>
       <div className="App">
         {/* <Test/> */}
 
