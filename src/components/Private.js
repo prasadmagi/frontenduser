@@ -63,14 +63,24 @@ export const Private = () => {
 
     setisloading(true)
     let username = dataUser.username
-    let url = window.REACT_APP_URL + "getUserData"
-    let input = {
+    let url1 = window.REACT_APP_URL + "getUserData"
+    let input1 = {
       name: username
     }
 
-    let response = await axios.get(url, input)
-    let result = await response.data
+    let response1 = await axios.get(url1, input1)
+    let result1 = await response1.data
     setisloading(false)
+    console.log(result1, "fetchusersata");
+
+    if (result1.msgId === -1) {
+      popUp({ message: result1.message, icons: "error", title: "Error" }).then((event) => {
+        if (event.isConfirmed) {
+
+        }
+        return
+      })
+    }
 
 
 
