@@ -14,6 +14,7 @@ import {
 export const Private = () => {
   debugger;
   const [data, setdata] = useState("");
+  const [userdata, setuserdata] = useState("");
   const [isloading, setisloading] = useState(false);
   const dataUser = useContext(UserContext);
   const handleSubmitData = () => {
@@ -56,6 +57,24 @@ export const Private = () => {
 
     setdata("");
   };
+
+  const handleUserData = async () => {
+    debugger
+
+    setisloading(true)
+    let username = dataUser.username
+    let url = window.REACT_APP_URL + "getUserData"
+    let input = {
+      name: username
+    }
+
+    let response = await axios.get(url, input)
+    let result = await response.data
+    setisloading(false)
+
+
+
+  }
   return (
     <>
       {isloading ? (
@@ -87,7 +106,7 @@ export const Private = () => {
               spacing={2}
             >
               <Typography>
-                Private Route with User Name : {dataUser.username}{" "}
+                Private Route with User Name : {dataUser.username}
               </Typography>
             </Grid>
             <Grid item spacing={2} xs={6}>
@@ -100,6 +119,17 @@ export const Private = () => {
                 variant="outlined"
               />
             </Grid>
+            {/* <Grid item spacing={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                className="button-block"
+                onClick={handleSubmitData}
+              >
+                Submit
+              </Button>
+            </Grid> */}
             <Grid item spacing={2}>
               <Button
                 variant="contained"
@@ -110,6 +140,17 @@ export const Private = () => {
               >
                 Submit
               </Button>
+            </Grid>
+            <Grid item spacing={2}>
+              <Button variant="contained"
+                color="primary"
+                type="submit"
+                className="button-block"
+                onClick={handleUserData}>Fetch User Data </Button>
+
+            </Grid>
+            <Grid item spacing={2}>
+              <Typography>{userdata}</Typography>
             </Grid>
           </Grid>
         </>

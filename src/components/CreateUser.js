@@ -3,19 +3,20 @@ import React, { useState } from "react";
 import { popUp } from "../Helper";
 import {
   Button,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 export const CreateUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
-  const [role, setrole] = useState(null);
+  const [isAdmin, setisAdmin] = useState("Yes");
   const [isLoading, setisLoading] = useState(false);
   const handlesubmit = (e) => {
     debugger;
@@ -31,7 +32,7 @@ export const CreateUser = () => {
     let input = {
       name: name,
       password: password,
-      role: role,
+      isAdmin: isAdmin,
     };
     let response = await axios.post(url, input);
 
@@ -60,15 +61,11 @@ export const CreateUser = () => {
     }
   };
 
-  const handleChangeSelect = (e) => {
+  const handleChange = (e) => {
     debugger;
-    let value = e.target.value;
+    setisAdmin(e.target.value)
 
-    if (value === 1) {
-      setrole(true);
-    } else {
-      setrole(false);
-    }
+
   };
   return (
     <>
@@ -116,23 +113,21 @@ export const CreateUser = () => {
                 type="password"
               />
             </Grid>
-            {/* <Grid item spacing={2} xs={8}> */}
-            <FormControl fullWidth>
-              <Grid item spacing={2} xs={8}>
-                {/* <InputLabel id="demo-simple-select-label">Role</InputLabel> */}
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={role}
-                  label="Role"
-                  onChange={handleChangeSelect}
+            <Grid item spacing={2} xs={8}>
+              <FormControl>
+                <FormLabel id="demo-controlled-radio-buttons-group">Admin</FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  value={isAdmin}
+                  onChange={handleChange}
                 >
-                  <MenuItem value={1}>Admin</MenuItem>
-                  <MenuItem value={2}>Normal</MenuItem>
-                </Select>
-              </Grid>
-            </FormControl>
-            {/* </Grid> */}
+                  <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                  <FormControlLabel value="No" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
             <Grid item spacing={2} xs={8}>
               <Button
                 variant="contained"

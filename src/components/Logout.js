@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { popUp } from "../Helper";
 import { CircularProgress } from "@mui/material";
 
@@ -7,12 +7,10 @@ export const Logout = () => {
   const handleSubmit = () => {
     debugger;
     setisLoading(true);
-  
-
     let token = localStorage.getItem("token");
     setisLoading(false)
     if (token) {
-        localStorage.clear("token");
+      localStorage.clear("token");
       popUp({
         message: "User logout successfully",
         icons: "success",
@@ -23,12 +21,12 @@ export const Logout = () => {
         return;
       });
     } else {
-        popUp({message:"Please Login First", icons:"error", title:"Error"}).then((event)=>{
-            if(event.isConfirmed) {
+      popUp({ message: "Please Login First", icons: "error", title: "Error" }).then((event) => {
+        if (event.isConfirmed) {
 
-            }
-            return 
-        })
+        }
+        return
+      })
     }
   };
 
@@ -36,11 +34,11 @@ export const Logout = () => {
     <div>
       {
         isLoading ?
-        (<CircularProgress/>) :
-        <div>
-          <h2>Logout</h2>
-          <button onClick={handleSubmit}>Logout</button>
-        </div>
+          (<CircularProgress />) :
+          <div>
+            <h2>Logout</h2>
+            <button onClick={handleSubmit}>Logout</button>
+          </div>
       }
     </div>
   );

@@ -48,6 +48,7 @@ export const LoginUser = () => {
           title: "Error",
         }).then((event) => {
           if (event.isConfirmed) {
+            navigate("/logout")
           }
           return;
         });
@@ -66,7 +67,7 @@ export const LoginUser = () => {
     };
     data.setusername(name)
 
-    console.log(data.user,"set");
+    console.log(data.user, "set");
     await PostService("loginUser", input)
       .then((resp) => {
         setisloading(false);

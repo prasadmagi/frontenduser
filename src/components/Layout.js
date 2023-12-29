@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import UserContext from "./UserContext";
 
 export const Layout = () => {
-  const {AuthToken }= useContext(UserContext)
+  const { AuthToken } = useContext(UserContext)
   console.log(AuthToken, "layouttoken");
   return (
     <>
@@ -143,86 +143,85 @@ export const Layout = () => {
                   </Typography>
                 </Link>
               </MenuItem>
-              {AuthToken ? (
-                <>
-                  <MenuItem>
-                    <Link to="/DeleteUser">
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          my: 2,
-                          color: "white",
-                          display: "block",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        DeleteUser
-                      </Typography>
-                    </Link>
-                  </MenuItem>
 
-                  <MenuItem>
-                    <Link to="/Private">
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          my: 2,
-                          color: "white",
-                          display: "block",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Private
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link to="/ChangeUserName">
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          my: 2,
-                          color: "white",
-                          display: "block",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        ChangeUserName
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link to="/ChangePassword">
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          my: 2,
-                          color: "white",
-                          display: "block",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        ChangePassword
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link to="/Logout">
-                      <Typography
-                        textAlign="center"
-                        sx={{
-                          my: 2,
-                          color: "white",
-                          display: "block",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Logout
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-                </>
-              ) : null}
+
+              <MenuItem>
+                <Link to="/DeleteUser">
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    DeleteUser
+                  </Typography>
+                </Link>
+              </MenuItem>
+
+              <MenuItem>
+                <Link to="/Private">
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Private
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/ChangeUserName">
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ChangeUserName
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/ChangePassword">
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ChangePassword
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/Logout">
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Logout
+                  </Typography>
+                </Link>
+              </MenuItem>
+
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
@@ -244,10 +243,10 @@ export const Layout = () => {
                   vertical: "top",
                   horizontal: "right",
                 }}
-                // open={Boolean(anchorElUser)}
-                // onClose={handleCloseUserMenu}
+              // open={Boolean(anchorElUser)}
+              // onClose={handleCloseUserMenu}
               >
-         
+
               </Menu>
             </Box>
           </Toolbar>
