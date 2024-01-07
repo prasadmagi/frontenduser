@@ -53,6 +53,10 @@ export const ChangeUserName = () => {
         return;
       });
     }
+
+    setoldname("")
+    setnewname("")
+    setpassword("")
   };
   return (
     <>

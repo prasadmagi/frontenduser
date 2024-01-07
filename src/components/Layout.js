@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 export const Layout = () => {
-  const { AuthToken } = useContext(UserContext)
+  const AuthToken = useContext(UserContext)
   const [isLoading, setisLoading] = useState(false)
   const navigate = useNavigate()
   const setting = ["Profile", "Logout"]
@@ -26,7 +26,12 @@ export const Layout = () => {
 
 
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    debugger
+    console.log(AuthToken);
+    if (AuthToken) {
+
+      setAnchorElUser(event.currentTarget);
+    }
   };
 
   const handleMenuClick = async (e) => {
@@ -272,7 +277,21 @@ export const Layout = () => {
                         </Typography>
                       </Link>
                     </MenuItem>
-
+                    <MenuItem>
+                      <Link to="/AdminPanel">
+                        <Typography
+                          textAlign="center"
+                          sx={{
+                            my: 2,
+                            color: "white",
+                            display: "block",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          AdminPanel
+                        </Typography>
+                      </Link>
+                    </MenuItem>
 
                   </Box>
 

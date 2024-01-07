@@ -99,6 +99,10 @@ export const LoginUser = () => {
 
           localStorage.setItem("token", result.token);
         }
+
+        setname("")
+        setpassword("")
+
       })
       .catch((err) => {
         popUp({ message: err, icons: "error", title: "Error" });

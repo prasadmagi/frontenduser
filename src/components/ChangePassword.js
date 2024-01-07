@@ -53,6 +53,9 @@ export const ChangePassword = () => {
         return;
       });
     }
+    setname("")
+    setoldpassword("")
+    setnewpassword("")
   };
   return (
     <>
@@ -94,6 +97,7 @@ export const ChangePassword = () => {
                 value={oldpassword}
                 onChange={(e) => setoldpassword(e.target.value)}
                 id="outlined-basic"
+                type="password"
                 label="Old Password"
                 variant="outlined"
               />
@@ -103,6 +107,7 @@ export const ChangePassword = () => {
                 value={newpassword}
                 onChange={(e) => setnewpassword(e.target.value)}
                 id="outlined-basic"
+                type="password"
                 label="New Password"
                 variant="outlined"
               />

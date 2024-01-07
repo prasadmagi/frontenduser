@@ -4,7 +4,7 @@ import { popUp } from '../Helper'
 import { ToastContainer, toast } from 'react-toastify';
 export const Protected = (props) => {
   debugger
-  const { Component } = props
+  const { Component, admin } = props
 
   const navigate = useNavigate()
   useEffect(() => {
@@ -16,13 +16,17 @@ export const Protected = (props) => {
         navigate("/LoginUser")
       }, 500)
 
+    } else {
+      console.log(admin, "check");
+      console.log(Component, "check2");
+
     }
   },)
   return (
     <div>
-      <h1> Protect Route</h1>
+
       <Component />
-      <ToastContainer />
+
     </div>
   )
 }

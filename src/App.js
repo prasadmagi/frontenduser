@@ -10,17 +10,18 @@ import { Private } from "./components/Private";
 import { Protected } from "./components/Protected";
 import { ChangeUserName } from "./components/ChangeUserName";
 import { ChangePassword } from "./components/ChangePassword";
-import { createContext } from "react";
 import { useState } from "react";
 import UserContext from "./components/UserContext";
-
+import { AdminPanel } from "./components/AdminPanel";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function App() {
   const [user, setuser] = useState("");
+  const [isAdminUser, setisAdminUser] = useState(false);
   let token = localStorage.getItem('token')
   return (
-    <UserContext.Provider value={{username:user, setusername:setuser, AuthToken: token}}>
+    <UserContext.Provider value={{ username: user, setusername: setuser, AuthToken: token }}>
       <div className="App">
         {/* <Test/> */}
 
@@ -35,6 +36,7 @@ function App() {
               <Route path="LoginUser" element={<LoginUser />} />
               <Route path="DeleteUser" element={<DeleteUser />} />
               <Route path="Logout" element={<Logout />} />
+              <Route path="AdminPanel" element={<Protected Component={AdminPanel} admin={true} />} />
               <Route
                 path="Private"
                 element={<Protected Component={Private} />}
@@ -47,12 +49,15 @@ function App() {
                 path="ChangePassword"
                 element={<Protected Component={ChangePassword} />}
               />
+
               {/* <Route path="*" element={<NoPage />} /> */}
             </Route>
           </Routes>
         </BrowserRouter>
       </div>
+      <ToastContainer />
     </UserContext.Provider>
+
   );
 }
 

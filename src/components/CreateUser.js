@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { popUp } from "../Helper";
 import {
   Button,
@@ -18,6 +18,8 @@ export const CreateUser = () => {
   const [password, setpassword] = useState("");
   const [isAdmin, setisAdmin] = useState("Yes");
   const [isLoading, setisLoading] = useState(false);
+  const nameref = useRef(null)
+  const passwordref = useRef(null)
   const handlesubmit = (e) => {
     debugger;
     e.preventDefault();
@@ -39,7 +41,8 @@ export const CreateUser = () => {
     let result = await response.data;
     setisLoading(false);
     console.log(result, "createUser");
-
+    console.log("ref1", nameref);
+    console.log("ref2", passwordref);
     if (result.msgId === -1) {
       popUp({ message: result.message, icons: "error", title: "Error" }).then(
         (event) => {
@@ -59,6 +62,9 @@ export const CreateUser = () => {
         return;
       });
     }
+
+    setname("")
+    setpassword("")
   };
 
   const handleChange = (e) => {
@@ -101,6 +107,7 @@ export const CreateUser = () => {
                 id="outlined-basic"
                 label="Name"
                 variant="outlined"
+                ref={nameref}
               />
             </Grid>
             <Grid item spacing={2} xs={8}>
@@ -111,6 +118,7 @@ export const CreateUser = () => {
                 label="Password"
                 variant="outlined"
                 type="password"
+                ref={passwordref}
               />
             </Grid>
             <Grid item spacing={2} xs={8}>

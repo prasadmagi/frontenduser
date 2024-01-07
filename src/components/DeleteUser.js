@@ -43,6 +43,9 @@ export const DeleteUser = () => {
         return;
       });
     }
+    setname("")
+    setpassword("")
+
   };
 
   return (
@@ -69,7 +72,7 @@ export const DeleteUser = () => {
         >
           <Grid container item direction="column" justify="center" spacing={2}>
             <Grid item spacing={2} xs={8}>
-            <Typography>Delete User</Typography>
+              <Typography>Delete User</Typography>
             </Grid>
             <Grid item spacing={2} xs={8}>
               <TextField
