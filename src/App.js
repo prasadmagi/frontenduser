@@ -21,7 +21,7 @@ function App() {
   const [isAdminUser, setisAdminUser] = useState(false);
   let token = localStorage.getItem('token')
   return (
-    <UserContext.Provider value={{ username: user, setusername: setuser, AuthToken: token }}>
+    <UserContext.Provider value={{ username: user, setusername: setuser, AuthToken: token, isAdminUser:isAdminUser, setisAdminUser:setisAdminUser }}>
       <div className="App">
         {/* <Test/> */}
 

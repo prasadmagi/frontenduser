@@ -66,14 +66,15 @@ export const LoginUser = () => {
       password: password,
     };
     data.setusername(name)
-
+  
     console.log(data.user, "set");
     await PostService("loginUser", input)
       .then((resp) => {
         setisloading(false);
         console.log(resp, "resp");
         let result = resp.data;
-        console.log(result, "createUser");
+        data.setisAdminUser(result.isAdmin)
+        console.log(result, "loginUser");
         debugger;
         if (result.msgId === -1) {
           popUp({
