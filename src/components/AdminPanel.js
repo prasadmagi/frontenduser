@@ -40,7 +40,6 @@ export const AdminPanel = () => {
   };
   return (
     <>
- 
       {isLoading ? (
         <Grid
           container
@@ -66,36 +65,39 @@ export const AdminPanel = () => {
               Fetch All Users
             </Button>
           </Grid>
-          <Grid item spacing={2}>
+
+          <Card
+            variant="solid"
+            sx={{
+              width: "100%",
+              maxWidth: 500,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+              gap: 4,
+              backgroundColor: "blue",
+              color: "white",
+              margin:"1px"
+            }}
+          >
             {allUser &&
               allUser.map((user) => {
                 return (
-                  <>
-                    <Card sx={{ minWidth: 275 }}>
-                      <CardContent>
-                        <Typography
-                          sx={{ fontSize: 14 }}
-                          color="text.secondary"
-                          gutterBottom
-                        >
-                  
-                        </Typography>
-                        <Typography variant="h5" component="div">
-                        {user.name}
-                        </Typography>
-          
-                        <Typography variant="body2">
-                         {user.isActive ? user.isActive : ""}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        {/* <Button size="small">Learn More</Button> */}
-                      </CardActions>
-                    </Card>
-                  </>
+                  <CardContent sx={{margin:"10px"}}>
+                    <Typography level="title-md" textColor="inherit">
+                      {user.name}
+                    </Typography>
+                    <Typography textColor="inherit">
+                      <span>isAdmin:</span>
+                      {user.isAdmin === "No" ? "No" : "Yes"}
+                    </Typography>
+                    <Typography textColor="inherit">
+                      <span>UserActive:</span>
+                      {user.isActive === true ? "Active" : "Not Active"}
+                    </Typography>
+                  </CardContent>
                 );
               })}
-          </Grid>
+          </Card>
         </>
       )}
     </>
