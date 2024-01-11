@@ -70,11 +70,10 @@ export const AdminPanel = () => {
             variant="solid"
             sx={{
               width: "100%",
-              maxWidth: 500,
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-              gap: 4,
-              backgroundColor: "blue",
+              gap: 8,
+              marginTop:"10px",
               color: "white",
               margin:"1px"
             }}
@@ -82,7 +81,7 @@ export const AdminPanel = () => {
             {allUser &&
               allUser.map((user) => {
                 return (
-                  <CardContent sx={{margin:"10px"}}>
+                  <CardContent sx={{ backgroundColor: "blue", borderRadius:"10px", width:"120px"}}>
                     <Typography level="title-md" textColor="inherit">
                       {user.name}
                     </Typography>
