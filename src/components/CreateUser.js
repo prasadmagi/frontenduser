@@ -16,7 +16,7 @@ import FormLabel from '@mui/material/FormLabel';
 export const CreateUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
-  const [isAdmin, setisAdmin] = useState("Yes");
+  const [isAdmin, setisAdmin] = useState("No");
   const [isLoading, setisLoading] = useState(false);
   const nameref = useRef(null)
   const passwordref = useRef(null)
