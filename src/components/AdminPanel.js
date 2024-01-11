@@ -24,8 +24,17 @@ export const AdminPanel = () => {
   const dataUser = useContext(UserContext);
   console.log(dataUser, "dataUser");
   if (dataUser.isAdminUser !== "Yes") {
-    toast("User is not Admin");
-    navigate("/");
+
+    popUp({ message: "User is Not Admin", icons: "error", title: "Error" }).then((event) => {
+      if (event.isConfirmed) {
+
+
+      }
+    })
+    setTimeout(() => {
+
+      navigate("/");
+    }, 100)
   }
   const handleUserData = async () => {
     debugger;
@@ -73,15 +82,15 @@ export const AdminPanel = () => {
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
               gap: 8,
-              marginTop:"10px",
+              marginTop: "10px",
               color: "white",
-              margin:"1px"
+              margin: "1px"
             }}
           >
             {allUser &&
               allUser.map((user) => {
                 return (
-                  <CardContent sx={{ backgroundColor: "blue", borderRadius:"10px", width:"120px"}}>
+                  <CardContent sx={{ backgroundColor: "blue", borderRadius: "10px", width: "120px" }}>
                     <Typography level="title-md" textColor="inherit">
                       {user.name}
                     </Typography>

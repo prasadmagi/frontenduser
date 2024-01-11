@@ -7,6 +7,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
+import Paper from '@mui/material/Paper';
 import CircularProgress from "@mui/material/CircularProgress";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -73,6 +74,8 @@ export const CreateUser = () => {
 
 
   };
+
+  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
     <>
       {isLoading ? (
@@ -87,42 +90,34 @@ export const CreateUser = () => {
           <CircularProgress />
         </Grid>
       ) : (
-        <Grid
-          container
-          spacing={3}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ minHeight: "100vh" }}
-        >
-          <Grid container item direction="column" justify="center" spacing={2}>
-            <Grid item spacing={2} xs={8}>
-              <Typography>Create User</Typography>
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-                type="name"
-                id="outlined-basic"
-                label="Name"
-                variant="outlined"
-                ref={nameref}
-              />
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                id="outlined-basic"
-                label="Password"
-                variant="outlined"
-                type="password"
-                ref={passwordref}
-              />
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <FormControl>
+
+        <Grid>
+          <Paper elevation={10} style={paperStyle} square={true}>
+            <Grid align="center" sx={{ margin: "10px", height: "100%" }}>
+              <h2>Create User</h2>
+              <Grid sx={{ margin: "1rem" }}>
+                <TextField
+                  value={name}
+                  onChange={(e) => setname(e.target.value)}
+                  type="name"
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                  ref={nameref}
+                />
+              </Grid>
+              <Grid sx={{ margin: "1rem" }}>
+                <TextField
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                  id="outlined-basic"
+                  label="Password"
+                  variant="outlined"
+                  type="password"
+                  ref={passwordref}
+                />
+              </Grid>
+              <Grid align="center" sx={{ margin: "1rem" }}>
                 <FormLabel id="demo-controlled-radio-buttons-group">Admin</FormLabel>
                 <RadioGroup
                   row
@@ -131,52 +126,29 @@ export const CreateUser = () => {
                   value={isAdmin}
                   onChange={handleChange}
                 >
-                  <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                  <FormControlLabel value="No" control={<Radio />} label="No" />
+                  <Grid align="center" sx={{ margin: "2rem" }}>
+                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                  </Grid>
                 </RadioGroup>
-              </FormControl>
+              </Grid>
+              <Grid sx={{ margin: "1rem" }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className="button-block"
+                  onClick={handlesubmit}
+                  fullWidth
+                >
+                  Submit
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item spacing={2} xs={8}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className="button-block"
-                onClick={handlesubmit}
-              >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
+          </Paper>
         </Grid>
       )}
-      {/* <div>
-      <h2> User Create</h2>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <form onSubmit={handlesubmit}>
-          <input
-            value={name}
-            onChange={(e) => setname(e.target.value)}
-            placeholder="Enter Name"
-          />
-          <input
-            value={password}
-            onChange={(e) => setpassword(e.target.value)}
-            placeholder="Enter Name"
-          />
-          <label>
-            Role As Admin:
-            <select name="role" defaultValue={"false"} value={role}>
-              <option value={"true"}>True</option>
-              <option value={"False"}>False</option>
-            </select>
-          </label>
-          <input type="Submit" value={"Submit"} />
-        </form>
-      )}
-    </div> */}
+
     </>
   );
 };

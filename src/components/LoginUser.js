@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import Paper from '@mui/material/Paper';
 import UserContext from "./UserContext";
 
 export const LoginUser = () => {
@@ -66,7 +67,7 @@ export const LoginUser = () => {
       password: password,
     };
     data.setusername(name)
-  
+
     console.log(data.user, "set");
     await PostService("loginUser", input)
       .then((resp) => {
@@ -113,7 +114,7 @@ export const LoginUser = () => {
 
     // let result = await response.data;
   };
-
+  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
     <>
       {isloading ? (
@@ -129,26 +130,11 @@ export const LoginUser = () => {
         </Grid>
       ) : (
         <>
-          <Grid
-            container
-            spacing={3}
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            sx={{ minHeight: "100vh" }}
-          >
-            {/* <Grid item spacing={3}> */}
-            <Grid
-              container
-              item
-              direction="column"
-              justify="center"
-              spacing={2}
-            >
-              <Grid item spacing={2} xs={8}>
-                <Typography>Login User</Typography>
-              </Grid>
-              <Grid item spacing={2} xs={8}>
+
+          <Paper elevation={10} style={paperStyle} square={true}>
+            <Grid align="center" sx={{ margin: "10px" }}>
+              <h2>Login User</h2>
+              <Grid align="center" sx={{ margin: "1rem" }}>
                 <TextField
                   value={name}
                   onChange={(e) => setname(e.target.value)}
@@ -158,7 +144,7 @@ export const LoginUser = () => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item spacing={2} xs={6}>
+              <Grid align="center" sx={{ margin: "1rem" }} >
                 <TextField
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}
@@ -168,22 +154,23 @@ export const LoginUser = () => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item spacing={2}>
+              <Grid align="center" sx={{ margin: "1rem" }}>
                 <Button
                   variant="contained"
                   color="primary"
                   type="submit"
                   className="button-block"
                   onClick={handlesubmit}
+                  fullWidth
                 >
                   Submit
                 </Button>
               </Grid>
             </Grid>
-            {/* </Grid> */}
-          </Grid>
+          </Paper>
         </>
-      )}
+      )
+      }
     </>
   );
 };
