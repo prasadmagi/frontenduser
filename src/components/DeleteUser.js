@@ -1,7 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { popUp } from "../Helper";
-import { Button, CircularProgress, Grid, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 export const DeleteUser = () => {
   const [name, setname] = useState("");
@@ -43,11 +50,15 @@ export const DeleteUser = () => {
         return;
       });
     }
-    setname("")
-    setpassword("")
-
+    setname("");
+    setpassword("");
   };
-
+  const paperStyle = {
+    padding: 20,
+    height: "70vh",
+    width: 280,
+    margin: "20px auto",
+  };
   return (
     <div>
       {isLoading ? (
@@ -62,19 +73,11 @@ export const DeleteUser = () => {
           <CircularProgress />
         </Grid>
       ) : (
-        <Grid
-          container
-          spacing={3}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ minHeight: "100vh" }}
-        >
-          <Grid container item direction="column" justify="center" spacing={2}>
-            <Grid item spacing={2} xs={8}>
-              <Typography>Delete User</Typography>
-            </Grid>
-            <Grid item spacing={2} xs={8}>
+
+        <Paper elevation={10} style={paperStyle} square={true}>
+          <Grid align="center" sx={{ margin: "10px", height: "100%" }}>
+            <h2>Delete User</h2>
+            <Grid sx={{ margin: "1rem" }}>
               <TextField
                 value={name}
                 onChange={(e) => setname(e.target.value)}
@@ -84,7 +87,7 @@ export const DeleteUser = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item spacing={2} xs={8}>
+            <Grid sx={{ margin: "1rem" }}>
               <TextField
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
@@ -94,34 +97,20 @@ export const DeleteUser = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item spacing={2} xs={8}>
+            <Grid sx={{ margin: "1rem" }}>
               <Button
                 variant="contained"
                 color="primary"
                 type="submit"
                 className="button-block"
                 onClick={handlesubmit}
+                fullWidth
               >
                 Submit
               </Button>
             </Grid>
           </Grid>
-        </Grid>
-        // <div>
-        //   <input
-        //     value={name}
-        //     onChange={(e) => setname(e.target.value)}
-        //     placeholder="Enter Name"
-        //     type="name"
-        //   />
-        //   <input
-        //     value={password}
-        //     onChange={(e) => setpassword(e.target.value)}
-        //     placeholder="Enter Password"
-        //     type="password"
-        //   />
-        //   <button onClick={handleSubmit}>Submit</button>
-        // </div>
+        </Paper>
       )}
     </div>
   );

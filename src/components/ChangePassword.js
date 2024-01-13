@@ -5,6 +5,7 @@ import {
   Button,
   CircularProgress,
   Grid,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -57,6 +58,8 @@ export const ChangePassword = () => {
     setoldpassword("")
     setnewpassword("")
   };
+  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
+
   return (
     <>
       {isLoading ? (
@@ -71,29 +74,21 @@ export const ChangePassword = () => {
           <CircularProgress />
         </Grid>
       ) : (
-        <Grid
-          container
-          spacing={3}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ minHeight: "100vh" }}
-        >
-          <Grid container item direction="column" justify="center" spacing={2}>
-            <Grid item spacing={2} xs={8}>
-              <Typography>Change User Password</Typography>
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
+
+        <Paper elevation={8} style={paperStyle}>
+        <Grid align="center">
+          <h2>Change User Passsword</h2>
+          <Grid sx={{margin:"1rem"}}>
+          <TextField
                 value={name}
                 onChange={(e) => setname(e.target.value)}
                 id="outlined-basic"
                 label="Name"
                 variant="outlined"
               />
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
+          </Grid>
+          <Grid sx={{margin:"1rem"}}>
+               <TextField
                 value={oldpassword}
                 onChange={(e) => setoldpassword(e.target.value)}
                 id="outlined-basic"
@@ -101,9 +96,9 @@ export const ChangePassword = () => {
                 label="Old Password"
                 variant="outlined"
               />
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
+          </Grid>
+          <Grid sx={{margin:"1rem"}}>
+                <TextField
                 value={newpassword}
                 onChange={(e) => setnewpassword(e.target.value)}
                 id="outlined-basic"
@@ -111,20 +106,21 @@ export const ChangePassword = () => {
                 label="New Password"
                 variant="outlined"
               />
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <Button
+          </Grid>
+          <Grid sx={{margin:"1rem"}}>
+               <Button
                 variant="contained"
                 color="primary"
                 type="submit"
                 className="button-block"
                 onClick={handleSubmit}
+                fullWidth
               >
                 Submit
               </Button>
-            </Grid>
           </Grid>
         </Grid>
+      </Paper>
       )}
 
       {/* <div>

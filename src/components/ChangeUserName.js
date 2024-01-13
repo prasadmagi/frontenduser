@@ -5,6 +5,7 @@ import {
   Button,
   CircularProgress,
   Grid,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -58,6 +59,7 @@ export const ChangeUserName = () => {
     setnewname("")
     setpassword("")
   };
+  const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
     <>
       {isLoading ? (
@@ -72,20 +74,12 @@ export const ChangeUserName = () => {
           <CircularProgress />
         </Grid>
       ) : (
-        <Grid
-          container
-          spacing={3}
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ minHeight: "100vh" }}
-        >
-          <Grid container item direction="column" justify="center" spacing={2}>
-            <Grid item spacing={2} xs={8}>
-              <Typography>Change User Name</Typography>
-            </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
+       
+        <Paper elevation={8} style={paperStyle}>
+          <Grid align="center">
+            <h2>Change User Name</h2>
+            <Grid sx={{margin:"1rem"}}>
+            <TextField
                 value={oldname}
                 onChange={(e) => setoldname(e.target.value)}
                 type="name"
@@ -94,8 +88,8 @@ export const ChangeUserName = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
+            <Grid sx={{margin:"1rem"}}>
+            <TextField
                 value={newname}
                 onChange={(e) => setnewname(e.target.value)}
                 type="name"
@@ -104,8 +98,8 @@ export const ChangeUserName = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item spacing={2} xs={8}>
-              <TextField
+            <Grid sx={{margin:"1rem"}}>
+            <TextField
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
                 type="password"
@@ -114,27 +108,22 @@ export const ChangeUserName = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid item spacing={2} xs={8}>
-              <Button
+            <Grid sx={{margin:"1rem"}}>
+            <Button
                 variant="contained"
                 color="primary"
                 type="submit"
                 className="button-block"
                 onClick={handlesubmit}
+                fullWidth
               >
                 Submit
               </Button>
             </Grid>
           </Grid>
-        </Grid>
+        </Paper>
       )}
-      {/* <div>
-        <h2>Change the User name </h2>
-        <input value={oldname} onChange={(e)=>setoldname(e.target.value)} placeholder='Enter Old Name'/>
-        <input value={newname} onChange={(e)=>setnewname(e.target.value)} placeholder='Enter New Name'/>
-        <input value={password} onChange={(e)=>setpassword(e.target.value)} placeholder='Enter Password'/>
-        <button onClick={handleSubmit}>Submit</button>
-    </div> */}
+
     </>
   );
 };
