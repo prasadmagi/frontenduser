@@ -7,6 +7,7 @@ import {
   Button,
   CircularProgress,
   Grid,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -47,12 +48,13 @@ export const AdminPanel = () => {
     setallUser(result.user);
     console.log(result, "fetchallusers");
   };
+  const paperStyle = { padding: 0, height: '20vh', width: "150px", margin: "10px" }
   return (
     <>
       {isLoading ? (
         <Grid
           container
-          spacing={3}
+          spacing={1}
           direction="column"
           alignItems="center"
           justifyContent="center"
@@ -74,7 +76,7 @@ export const AdminPanel = () => {
               Fetch All Users
             </Button>
           </Grid>
-
+         
           <Card
             variant="solid"
             sx={{
@@ -90,7 +92,8 @@ export const AdminPanel = () => {
             {allUser &&
               allUser.map((user) => {
                 return (
-                  <CardContent sx={{ backgroundColor: "blue", borderRadius: "10px", width: "120px" }}>
+                  <Paper  elevation={10} style={paperStyle} square={true} >
+                  <CardContent sx={{  borderRadius: "10px", width: "100%"}}>
                     <Typography level="title-md" textColor="inherit">
                       {user.name}
                     </Typography>
@@ -103,9 +106,11 @@ export const AdminPanel = () => {
                       {user.isActive === true ? "Active" : "Not Active"}
                     </Typography>
                   </CardContent>
+                  </Paper>
                 );
               })}
           </Card>
+        
         </>
       )}
     </>
