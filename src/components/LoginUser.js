@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useContext, createContext, useEffect } from "react";
 import { popUp } from "../Helper";
 import { PostService } from "../util/Services";
 import { useNavigate } from "react-router-dom";
@@ -18,11 +18,27 @@ export const LoginUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
+
   const navigate = useNavigate();
   const data = useContext(UserContext)
   let token = localStorage.getItem("token");
-  // console.log(data.username,"check1");
-  // console.log(data.setusername,"check2");
+
+  useEffect(() => {
+    debugger
+    if (token) {
+      setisloading(true)
+      popUp({ message: "User Already Login Please Logout First", icons: "error", title: "Error" }).then((event) => {
+        if (event.isConfirmed) {
+
+          navigate('/logout')
+        }
+        navigate('/logout')
+      })
+      return
+
+    }
+  }, [])
+
   const handlesubmit = (e) => {
     setisloading(true);
     debugger;

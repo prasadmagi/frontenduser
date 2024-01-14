@@ -7,7 +7,6 @@ import {
   Grid,
   Paper,
   TextField,
-  Typography,
 } from "@mui/material";
 
 export const DeleteUser = () => {

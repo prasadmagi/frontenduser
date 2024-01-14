@@ -4,21 +4,17 @@ import { popUp } from '../Helper'
 import { ToastContainer, toast } from 'react-toastify';
 export const Protected = (props) => {
   debugger
-  const { Component, admin } = props
+  const { Component } = props
 
   const navigate = useNavigate()
   useEffect(() => {
     let token = localStorage.getItem("token")
     if (!token) {
-      toast("Please Login First")
+      toast("Please Login First", { toastId: 'success1', })
 
       setTimeout(() => {
         navigate("/LoginUser")
       }, 500)
-
-    } else {
-      console.log(admin, "check");
-      console.log(Component, "check2");
 
     }
   },)
