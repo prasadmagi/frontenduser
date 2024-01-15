@@ -64,11 +64,9 @@ export const Private = () => {
     setisloading(true)
     let username = dataUser.username
     let url1 = window.REACT_APP_URL + "getUserData"
-    let input1 = {
-      name: username
-    }
+    let name = username
 
-    let response1 = await axios.get(url1, input1)
+    let response1 = await axios.get(url1, name)
     let result1 = await response1.data
     setisloading(false)
     console.log(result1, "fetchusersata");
@@ -129,17 +127,7 @@ export const Private = () => {
                 variant="outlined"
               />
             </Grid>
-            {/* <Grid item spacing={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className="button-block"
-                onClick={handleSubmitData}
-              >
-                Submit
-              </Button>
-            </Grid> */}
+
             <Grid item spacing={2}>
               <Button
                 variant="contained"
