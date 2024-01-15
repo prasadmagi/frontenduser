@@ -12,8 +12,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useSelector, useDispatch } from "react-redux";
+import { createUser } from "../redux/authActions";
+
 export const CreateUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
@@ -21,6 +23,8 @@ export const CreateUser = () => {
   const [isLoading, setisLoading] = useState(false);
   const nameref = useRef(null)
   const passwordref = useRef(null)
+  const {loading,userName,userToken, success } =  useSelector((state)=>state.auth)
+  const dispatch = useDispatch()
   const handlesubmit = (e) => {
     debugger;
     e.preventDefault();
@@ -74,7 +78,16 @@ export const CreateUser = () => {
 
 
   };
-
+  const handlesubmit1 = ()=>{
+    debugger;
+    const data = {
+      name:name,
+      password:password,
+      isAdmin:isAdmin
+    }
+    dispatch(createUser(data))
+    console.log(userName);
+  }
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
     <>
@@ -143,6 +156,16 @@ export const CreateUser = () => {
                 >
                   Submit
                 </Button>
+                {/* <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className="button-block"
+                  onClick={handlesubmit1}
+                  fullWidth
+                >
+                  Submit
+                </Button> */}
               </Grid>
             </Grid>
           </Paper>
