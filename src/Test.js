@@ -9,7 +9,7 @@ export const Test = () => {
 
     let data = result.data
     setmsg(data.message)
-    console.log(data, " api data")
+    // console.log(data, " api data")
   }
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const Test = () => {
   }, [])
   return (
     <div>
-      <h1>API testing api </h1>
+      <h1>Welcome to User Authentication</h1>
 
       <p>{msg}</p>
 

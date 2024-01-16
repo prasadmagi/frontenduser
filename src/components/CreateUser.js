@@ -17,13 +17,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { createUser } from "../redux/authActions";
 
 export const CreateUser = () => {
+  debugger
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isAdmin, setisAdmin] = useState("No");
   const [isLoading, setisLoading] = useState(false);
   const nameref = useRef(null)
   const passwordref = useRef(null)
-  const {loading,userName,userToken, success } =  useSelector((state)=>state.auth)
+  const { loading, message, msgId } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const handlesubmit = (e) => {
     debugger;
@@ -78,15 +79,37 @@ export const CreateUser = () => {
 
 
   };
-  const handlesubmit1 = ()=>{
+  const handlesubmit1 = () => {
     debugger;
     const data = {
-      name:name,
-      password:password,
-      isAdmin:isAdmin
+      name: name,
+      password: password,
+      isAdmin: isAdmin
     }
     dispatch(createUser(data))
-    console.log(userName);
+    debugger
+    if (msgId === -1) {
+      popUp({ message: message, icons: "error", title: "Error" }).then(
+        (event) => {
+          if (event.isConfirmed) {
+          }
+          return;
+        }
+      );
+    } else if (msgId === 0) {
+      popUp({
+        message: message,
+        icons: "success",
+        title: "Success",
+      }).then((event) => {
+        if (event.isConfirmed) {
+        }
+        return;
+      });
+    }
+
+    setname("")
+    setpassword("")
   }
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
@@ -156,16 +179,7 @@ export const CreateUser = () => {
                 >
                   Submit
                 </Button>
-                {/* <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  className="button-block"
-                  onClick={handlesubmit1}
-                  fullWidth
-                >
-                  Submit
-                </Button> */}
+
               </Grid>
             </Grid>
           </Paper>

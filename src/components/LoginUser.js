@@ -20,10 +20,10 @@ export const LoginUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
- const {userName,userToken,success, message, msgId, user} =  useSelector((state)=>state.auth)
- const dispatch = useDispatch()
+  const { userName, userToken, success, message, msgId, user, loading } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
   const navigate = useNavigate();
-  const data = useContext(UserContext)
+  // const data = useContext(UserContext)
   let token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const LoginUser = () => {
       });
       return;
     } else {
-      if (token) {
+      if (userToken) {
         popUp({
           message: "User Already Login",
           icons: "error",
@@ -78,29 +78,30 @@ export const LoginUser = () => {
       }
     }
   };
-  // const handlesubmit1 = ()=> {
-  //   debugger
-  //   const data = {
-  //     name:name,
-  //     password:password
-  //   }
-  //   dispatch(loginUser(data))
-  //   if(msgId === 0) {
-  //     popUp({message:message, icons:"success",title:"Success"}).then((event)=>{
-  //       if(event.isConfirmed) {
+  const handlesubmit1 = () => {
+    debugger
+    const data = {
+      name: name,
+      password: password
+    }
+    dispatch(loginUser(data))
+    if (msgId === 0) {
+      popUp({ message: message, icons: "success", title: "Success" }).then((event) => {
+        if (event.isConfirmed) {
 
-  //       }
-  //     })
-  //     return
-  //   }else if(msgId === -1) {
-  //     popUp({message:message, icons:"error", title:"Error"}).then((event)=>{
-  //       if(event.isConfirmed) {
-          
-  //       }
-  //     })
-  //   }
-  //   console.log(userName, "user");
-  // }
+        }
+      })
+      return
+    } else if (msgId === -1) {
+      popUp({ message: message, icons: "error", title: "Error" }).then((event) => {
+        if (event.isConfirmed) {
+
+        }
+        return
+      })
+    }
+    console.log(userName, "user");
+  }
   const loginApiCall = async () => {
     debugger;
     // let url = window.REACT_APP_URL+"loginUser";
@@ -108,15 +109,15 @@ export const LoginUser = () => {
       name: name,
       password: password,
     };
-    data.setusername(name)
 
-    console.log(data.user, "set");
+
+
     await PostService("loginUser", input)
       .then((resp) => {
         setisloading(false);
         console.log(resp, "resp");
         let result = resp.data;
-        data.setisAdminUser(result.isAdmin)
+
         console.log(result, "loginUser");
         debugger;
         if (result.msgId === -1) {
@@ -207,16 +208,7 @@ export const LoginUser = () => {
                 >
                   Submit
                 </Button>
-                {/* <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  className="button-block"
-                  onClick={handlesubmit1}
-                  fullWidth
-                >
-                  Submit
-                </Button> */}
+
               </Grid>
             </Grid>
           </Paper>
