@@ -12,13 +12,16 @@ import {
 } from "@mui/material";
 import Paper from '@mui/material/Paper';
 import UserContext from "./UserContext";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/authActions";
 
 export const LoginUser = () => {
   debugger;
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
-
+ const {userName,userToken,success, message, msgId, user} =  useSelector((state)=>state.auth)
+ const dispatch = useDispatch()
   const navigate = useNavigate();
   const data = useContext(UserContext)
   let token = localStorage.getItem("token");
@@ -71,10 +74,33 @@ export const LoginUser = () => {
         });
       } else {
         loginApiCall();
+
       }
     }
   };
+  // const handlesubmit1 = ()=> {
+  //   debugger
+  //   const data = {
+  //     name:name,
+  //     password:password
+  //   }
+  //   dispatch(loginUser(data))
+  //   if(msgId === 0) {
+  //     popUp({message:message, icons:"success",title:"Success"}).then((event)=>{
+  //       if(event.isConfirmed) {
 
+  //       }
+  //     })
+  //     return
+  //   }else if(msgId === -1) {
+  //     popUp({message:message, icons:"error", title:"Error"}).then((event)=>{
+  //       if(event.isConfirmed) {
+          
+  //       }
+  //     })
+  //   }
+  //   console.log(userName, "user");
+  // }
   const loginApiCall = async () => {
     debugger;
     // let url = window.REACT_APP_URL+"loginUser";
@@ -181,6 +207,16 @@ export const LoginUser = () => {
                 >
                   Submit
                 </Button>
+                {/* <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  className="button-block"
+                  onClick={handlesubmit1}
+                  fullWidth
+                >
+                  Submit
+                </Button> */}
               </Grid>
             </Grid>
           </Paper>
