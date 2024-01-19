@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createUser, loginUser } from "./authActions";
 
 // const intialState =
-
+const userToken = localStorage.getItem('token')
+  ? localStorage.getItem('token')
+  : null
 export const userSlice = createSlice({
   name: "auth",
 
@@ -14,7 +16,7 @@ export const userSlice = createSlice({
     msgId: 0,
     success: false,
     error: null,
-
+    isAdmin:""
   },
   reducers: {
 
@@ -33,6 +35,10 @@ export const userSlice = createSlice({
       state.loading = false
       state.userName = action.payload.user
       state.userToken = action.payload.token
+      state.isAdmin = action.payload.isAdmin
+      localStorage.setItem("token",action.payload.token)
+
+
     })
     builder.addCase(loginUser.rejected, (state, action) => {
       state.success = true
@@ -45,6 +51,7 @@ export const userSlice = createSlice({
       state.loading = true
     })
     builder.addCase(createUser.fulfilled, (state, action) => {
+      debugger
       state.success = false
       state.message = action.payload.message
       state.msgId = action.payload.msgId

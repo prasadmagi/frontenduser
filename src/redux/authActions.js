@@ -17,7 +17,7 @@ export const createUser = createAsyncThunk(
             }
             const createUserData = await axios.post(`${backendUrl}/createUser`, { name, password, isAdmin }, config)
 
-            return createUserData;
+            return createUserData.data;
         } catch (err) {
             console.log(err);
         }
