@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useContext, createContext, useEffect } from "react";
+import React, { useState, useContext, createContext, useEffect, useRef } from "react";
 import { popUp } from "../Helper";
 import { PostService } from "../util/Services";
 import { useNavigate } from "react-router-dom";
@@ -157,6 +157,10 @@ export const LoginUser = () => {
 
     // let result = await response.data;
   };
+  const handleClear = ()=> {
+    debugger
+   
+  }
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
     <>
@@ -185,6 +189,7 @@ export const LoginUser = () => {
                   id="outlined-basic"
                   label="Name"
                   variant="outlined"
+                
                 />
               </Grid>
               <Grid align="center" sx={{ margin: "1rem" }} >
@@ -195,6 +200,7 @@ export const LoginUser = () => {
                   id="outlined-basic"
                   label="Password"
                   variant="outlined"
+                 
                 />
               </Grid>
               <Grid align="center" sx={{ margin: "1rem" }}>
@@ -208,6 +214,7 @@ export const LoginUser = () => {
                 >
                   Submit
                 </Button>
+     
 
               </Grid>
             </Grid>

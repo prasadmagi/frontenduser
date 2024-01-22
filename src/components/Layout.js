@@ -18,6 +18,7 @@ import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { DrawerMenu } from "./DrawerMenu";
 import { Menus1, Menus2} from './Menus';
+import axios from "axios";
 export const Layout = () => {
   const theme = useTheme();
   const AuthToken = useContext(UserContext);
@@ -41,37 +42,41 @@ export const Layout = () => {
     setisLoading(true);
     console.log(e, "check");
     if (e === "Logout") {
-      let token = localStorage.getItem("token");
+      if(!token) {
+        popUp({message:"Please Login First", icons:"error", title:"Error"})
+        return
+      }else {
 
-      if (token) {
-        setisLoading(false);
-        localStorage.clear();
-        popUp({
-          message: "User Logout Successfully",
-          icons: "success",
-          title: "Success",
-        }).then((event) => {
-          if (event.isConfirmed) {
-            navigate("/");
-          }
-        });
-        return;
-      } else {
-        setisLoading(false);
-        popUp({
-          message: "Please Login First",
-          icons: "error",
-          title: "Error",
-        }).then((event) => {
-          if (event.isConfirmed) {
-            navigate("/LoginUser");
-          }
-        });
-        return;
+        // let token = localStorage.getItem("token");
+        apicall()
       }
+      // setisLoading(false)
+      
     }
   };
+  const apicall = async() => {
+    debugger
+    let url = window.REACT_APP_URL + "logout"
+    let input = {
 
+      token : localStorage.getItem("token")
+   }
+   const response = await axios.put(url,input)
+    
+    const result = await response.data
+    setisLoading(false)
+    console.log(result, "logout-result");
+    if(result.msgId === 0) {
+      popUp({message:result.message, icons:"success", title:"Success"})
+      localStorage.clear()
+      navigate("/")
+      return 
+    }else {
+      popUp({message:result.message, icons:"error", title:"Error"})
+      return 
+
+    }
+  }
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -83,6 +88,7 @@ export const Layout = () => {
     }else {
       setAllmenu([...Menus1])
     }
+
   }, [token])
   return (
     <>
@@ -198,12 +204,16 @@ export const Layout = () => {
 
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
+                  {
+                  token ?(
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
                       alt="Remy Sharp"
                       src="/static/images/avatar/2.jpg"
                     />
                   </IconButton>
+                  ): null
+                  }
                 </Tooltip>
                 <Menu
                   sx={{ mt: "45px" }}
@@ -230,7 +240,7 @@ export const Layout = () => {
                         {setting}
                       </Typography>
                     </MenuItem>
-                  ))}
+                  ))  }
                 </Menu>
               </Box>
             </Toolbar>

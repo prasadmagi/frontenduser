@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export const Private = () => {
   debugger;
@@ -17,6 +18,7 @@ export const Private = () => {
   const [userdata, setuserdata] = useState("");
   const [isloading, setisloading] = useState(false);
   const dataUser = useContext(UserContext);
+  const {userName} = useSelector((state)=>state.auth)
   const handleSubmitData = () => {
     debugger;
     setisloading(true);
@@ -114,7 +116,7 @@ export const Private = () => {
               spacing={2}
             >
               <Typography>
-                Private Route with User Name : {dataUser.username}
+                Private Route with User Name : {userName}
               </Typography>
             </Grid>
             <Grid item spacing={2} xs={6}>
