@@ -23,9 +23,9 @@ export const AdminPanel = () => {
   const [isLoading, setisLoading] = useState(false);
   const navigate = useNavigate();
   const dataUser = useContext(UserContext);
-  const {isAdmin} = useSelector((state)=>state.auth)
+  const { isAdmin } = useSelector((state) => state.auth)
   console.log(dataUser, "dataUser");
-  if (isAdmin !== "Yes") {
+  if (dataUser.isAdminUser !== "Yes") {
 
     popUp({ message: "User is Not Admin", icons: "error", title: "Error" }).then((event) => {
       if (event.isConfirmed) {
@@ -79,8 +79,8 @@ export const AdminPanel = () => {
               Fetch All Users
             </Button>
           </Grid>
-{/*          
-          <Card
+
+          {/* <Card
             variant="solid"
             sx={{
               width: "100%",
@@ -91,31 +91,42 @@ export const AdminPanel = () => {
               color: "white",
               margin: "1px"
             }}
-          >
-            {allUser &&
-              allUser.map((user) => {
-                return (
-                  <Paper  elevation={10} style={paperStyle} square={true} >
-                  <CardContent sx={{  borderRadius: "10px", width: "100%"}}>
-                    <Typography level="title-md" textColor="inherit">
-                      {user.name}
-                    </Typography>
+          > */}
+          {allUser &&
+            allUser.map((user) => {
+              return (
+                // <Paper elevation={10} style={paperStyle} square={true} >
+                //   <CardContent sx={{ borderRadius: "10px", width: "100%" }}>
+                //     <Typography level="title-md" textColor="inherit">
+                //       {user.name}
+                //     </Typography>
+                //     <Typography textColor="inherit">
+                //       <span>isAdmin:</span>
+                //       {user.isAdmin === "No" ? "No" : "Yes"}
+                //     </Typography>
+                //     <Typography textColor="inherit">
+                //       <span>UserActive:</span>
+                //       {user.isActive === true ? "Active" : "Not Active"}
+                //     </Typography>
+                //   </CardContent>
+                // </Paper>
+                <>
+                  <div style={{ border: "1px red solid", width: "100px", height: "30vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <h3>{user.name}</h3>
+                    <span>Admin:</span><span>{user.isAdmin === "No" ? "No" : "Yes"}</span><br />
+                    <span>Active:</span><span>{user.isActive === true ? "Active" : "Not Active"}</span><br />
                     <Typography textColor="inherit">
                       <span>isAdmin:</span>
                       {user.isAdmin === "No" ? "No" : "Yes"}
                     </Typography>
-                    <Typography textColor="inherit">
-                      <span>UserActive:</span>
-                      {user.isActive === true ? "Active" : "Not Active"}
-                    </Typography>
-                  </CardContent>
-                  </Paper>
-                );
-              })}
-          </Card> */}
+                  </div>
+                </>
+              );
+            })}
+          {/* </Card> */}
 
 
-        
+
         </>
       )}
     </>

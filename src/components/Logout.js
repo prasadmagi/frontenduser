@@ -15,34 +15,34 @@ export const Logout = () => {
 
     apicall()
   };
-  useEffect(()=> {
+  useEffect(() => {
     debugger
-    if(!token) {
-      popUp({message:"Please Login First", icons:"error", title:"Error"})
+    if (!token) {
+      popUp({ message: "Please Login First", icons: "error", title: "Error" })
       return
     }
-  },[token])
-  const apicall = async() => {
+  }, [token])
+  const apicall = async () => {
     debugger
     let url = window.REACT_APP_URL + "logout"
     let input = {
 
-       token : token
+      token: token
     }
-    const response = await axios.put(url,input)
-    
+    const response = await axios.put(url, input)
+
     const result = await response.data
     setisLoading(false)
     console.log(result, "logout-result");
 
-    if(result.msgId === 0) {
-      popUp({message:result.message, icons:"success", title:"Success"})
-      localStorage.clear()
+    if (result.msgId === 0) {
+      localStorage.clear("token")
+      popUp({ message: result.message, icons: "success", title: "Success" })
       navigate('/')
-      return 
-    }else {
-      popUp({message:result.message, icons:"error", title:"Error"})
-      return 
+      return
+    } else {
+      popUp({ message: result.message, icons: "error", title: "Error" })
+      return
 
     }
 

@@ -17,7 +17,7 @@ import { popUp } from "../Helper";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { DrawerMenu } from "./DrawerMenu";
-import { Menus1, Menus2} from './Menus';
+import { Menus1, Menus2 } from './Menus';
 import axios from "axios";
 export const Layout = () => {
   const theme = useTheme();
@@ -28,7 +28,7 @@ export const Layout = () => {
   const setting = ["Profile", "Logout"];
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [allmenu, setAllmenu] = useState([])
-  const token =localStorage.getItem("token")
+  const token = localStorage.getItem("token")
   const handleOpenUserMenu = (event) => {
     debugger;
     console.log(AuthToken);
@@ -42,38 +42,38 @@ export const Layout = () => {
     setisLoading(true);
     console.log(e, "check");
     if (e === "Logout") {
-      if(!token) {
-        popUp({message:"Please Login First", icons:"error", title:"Error"})
+      if (!token) {
+        popUp({ message: "Please Login First", icons: "error", title: "Error" })
         return
-      }else {
+      } else {
 
         // let token = localStorage.getItem("token");
         apicall()
       }
       // setisLoading(false)
-      
+
     }
   };
-  const apicall = async() => {
+  const apicall = async () => {
     debugger
     let url = window.REACT_APP_URL + "logout"
     let input = {
 
-      token : localStorage.getItem("token")
-   }
-   const response = await axios.put(url,input)
-    
+      token: localStorage.getItem("token")
+    }
+    const response = await axios.put(url, input)
+
     const result = await response.data
     setisLoading(false)
     console.log(result, "logout-result");
-    if(result.msgId === 0) {
-      popUp({message:result.message, icons:"success", title:"Success"})
-      localStorage.clear()
+    if (result.msgId === 0) {
+      localStorage.clear("token")
+      popUp({ message: result.message, icons: "success", title: "Success" })
       navigate("/")
-      return 
-    }else {
-      popUp({message:result.message, icons:"error", title:"Error"})
-      return 
+      return
+    } else {
+      popUp({ message: result.message, icons: "error", title: "Error" })
+      return
 
     }
   }
@@ -81,11 +81,11 @@ export const Layout = () => {
     setAnchorElUser(null);
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     debugger
-    if(token) {
+    if (token) {
       setAllmenu([...Menus2])
-    }else {
+    } else {
       setAllmenu([...Menus1])
     }
 
@@ -171,33 +171,33 @@ export const Layout = () => {
                   <DrawerMenu />
                 ) : (
                   <>
-                  {
-                    allmenu.map((menu) => {
-                      return (
-                        <>
+                    {
+                      allmenu.map((menu) => {
+                        return (
+                          <>
 
-                          <MenuItem>
-                            <Link to={`/${menu}`}>
-                              <Typography
-                                textAlign="center"
-                                sx={{
-                                  my: 2,
-                                  color: "white",
-                                  display: "block",
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                {menu}
-                              </Typography>
-                            </Link>
-                          </MenuItem>
-                        </>
-                      );
-                    })}
-   
-                    
-                  
-   
+                            <MenuItem>
+                              <Link to={`/${menu}`}>
+                                <Typography
+                                  textAlign="center"
+                                  sx={{
+                                    my: 2,
+                                    color: "white",
+                                    display: "block",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  {menu}
+                                </Typography>
+                              </Link>
+                            </MenuItem>
+                          </>
+                        );
+                      })}
+
+
+
+
                   </>
                 )}
               </Box>
@@ -205,14 +205,14 @@ export const Layout = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   {
-                  token ?(
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
-                  </IconButton>
-                  ): null
+                    token ? (
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar
+                          alt="Remy Sharp"
+                          src="/static/images/avatar/2.jpg"
+                        />
+                      </IconButton>
+                    ) : null
                   }
                 </Tooltip>
                 <Menu
@@ -240,7 +240,7 @@ export const Layout = () => {
                         {setting}
                       </Typography>
                     </MenuItem>
-                  ))  }
+                  ))}
                 </Menu>
               </Box>
             </Toolbar>

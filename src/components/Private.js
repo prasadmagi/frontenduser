@@ -18,7 +18,7 @@ export const Private = () => {
   const [userdata, setuserdata] = useState("");
   const [isloading, setisloading] = useState(false);
   const dataUser = useContext(UserContext);
-  const {userName} = useSelector((state)=>state.auth)
+  const { userName } = useSelector((state) => state.auth)
   const handleSubmitData = () => {
     debugger;
     setisloading(true);
@@ -66,9 +66,11 @@ export const Private = () => {
     setisloading(true)
     let username = dataUser.username
     let url1 = window.REACT_APP_URL + "getUserData"
-    let name = username
+    let input = {
+      name: username
+    }
 
-    let response1 = await axios.get(url1, name)
+    let response1 = await axios.get(url1, input)
     let result1 = await response1.data
     setisloading(false)
     console.log(result1, "fetchusersata");
@@ -116,7 +118,7 @@ export const Private = () => {
               spacing={2}
             >
               <Typography>
-                Private Route with User Name : {userName}
+                Private Route with User Name : {dataUser.username}
               </Typography>
             </Grid>
             <Grid item spacing={2} xs={6}>
