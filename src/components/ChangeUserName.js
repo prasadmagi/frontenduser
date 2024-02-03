@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { popUp } from "../Helper";
 import {
   Button,
@@ -9,12 +9,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import UserContext from "./UserContext";
 export const ChangeUserName = () => {
   const [oldname, setoldname] = useState("");
   const [newname, setnewname] = useState("");
   const [password, setpassword] = useState("");
   const [isLoading, setisLoading] = useState(false);
+  const dataUser = useContext(UserContext)
   const handlesubmit = (e) => {
     debugger;
     setisLoading(true);
@@ -59,6 +60,13 @@ export const ChangeUserName = () => {
     setnewname("")
     setpassword("")
   };
+
+  useEffect(() => {
+    debugger
+    let username = dataUser.username
+
+    setoldname(username)
+  }, [])
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
     <>
@@ -74,22 +82,23 @@ export const ChangeUserName = () => {
           <CircularProgress />
         </Grid>
       ) : (
-       
+
         <Paper elevation={8} style={paperStyle}>
           <Grid align="center">
             <h2>Change User Name</h2>
-            <Grid sx={{margin:"1rem"}}>
-            <TextField
+            <Grid sx={{ margin: "1rem" }}>
+              <TextField
                 value={oldname}
                 onChange={(e) => setoldname(e.target.value)}
                 type="name"
                 id="outlined-basic"
                 label="Old Name"
                 variant="outlined"
+                disabled={true}
               />
             </Grid>
-            <Grid sx={{margin:"1rem"}}>
-            <TextField
+            <Grid sx={{ margin: "1rem" }}>
+              <TextField
                 value={newname}
                 onChange={(e) => setnewname(e.target.value)}
                 type="name"
@@ -98,8 +107,8 @@ export const ChangeUserName = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid sx={{margin:"1rem"}}>
-            <TextField
+            <Grid sx={{ margin: "1rem" }}>
+              <TextField
                 value={password}
                 onChange={(e) => setpassword(e.target.value)}
                 type="password"
@@ -108,8 +117,8 @@ export const ChangeUserName = () => {
                 variant="outlined"
               />
             </Grid>
-            <Grid sx={{margin:"1rem"}}>
-            <Button
+            <Grid sx={{ margin: "1rem" }}>
+              <Button
                 variant="contained"
                 color="primary"
                 type="submit"
