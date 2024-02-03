@@ -80,50 +80,42 @@ export const AdminPanel = () => {
             </Button>
           </Grid>
 
-          {/* <Card
+          <Card
             variant="solid"
             sx={{
               width: "100%",
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-              gap: 8,
+              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 4fr))",
+              gap: 1,
               marginTop: "10px",
               color: "white",
               margin: "1px"
             }}
-          > */}
-          {allUser &&
-            allUser.map((user) => {
-              return (
-                // <Paper elevation={10} style={paperStyle} square={true} >
-                //   <CardContent sx={{ borderRadius: "10px", width: "100%" }}>
-                //     <Typography level="title-md" textColor="inherit">
-                //       {user.name}
-                //     </Typography>
-                //     <Typography textColor="inherit">
-                //       <span>isAdmin:</span>
-                //       {user.isAdmin === "No" ? "No" : "Yes"}
-                //     </Typography>
-                //     <Typography textColor="inherit">
-                //       <span>UserActive:</span>
-                //       {user.isActive === true ? "Active" : "Not Active"}
-                //     </Typography>
-                //   </CardContent>
-                // </Paper>
-                <>
-                  <div style={{ border: "1px red solid", width: "100px", height: "30vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <h3>{user.name}</h3>
-                    <span>Admin:</span><span>{user.isAdmin === "No" ? "No" : "Yes"}</span><br />
-                    <span>Active:</span><span>{user.isActive === true ? "Active" : "Not Active"}</span><br />
-                    <Typography textColor="inherit">
-                      <span>isAdmin:</span>
-                      {user.isAdmin === "No" ? "No" : "Yes"}
-                    </Typography>
-                  </div>
-                </>
-              );
-            })}
-          {/* </Card> */}
+          >
+            {allUser &&
+              allUser.map((user) => {
+                return (
+                  <>
+                    <Paper elevation={10} style={paperStyle} square={true} >
+                      <CardContent sx={{ borderRadius: "10px", width: "100%" }}>
+                        <Typography level="title-md" textColor="inherit">
+                          {user.name}
+                        </Typography>
+                        <Typography textColor="inherit">
+                          <span>isAdmin:</span>
+                          {user.isAdmin === "No" ? "No" : "Yes"}
+                        </Typography>
+                        <Typography textColor="inherit">
+                          <span>UserActive:</span>
+                          {user.isActive === true ? "Yes" : "No"}
+                        </Typography>
+                      </CardContent>
+                    </Paper>
+                  </>
+
+                );
+              })}
+          </Card >
 
 
 
