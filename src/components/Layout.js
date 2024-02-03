@@ -21,7 +21,7 @@ import { Menus1, Menus2 } from './Menus';
 import axios from "axios";
 export const Layout = () => {
   const theme = useTheme();
-  const AuthToken = useContext(UserContext);
+  const dataUser = useContext(UserContext);
   const useMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const [isLoading, setisLoading] = useState(false);
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ export const Layout = () => {
   const token = localStorage.getItem("token")
   const handleOpenUserMenu = (event) => {
     debugger;
-    console.log(AuthToken);
-    if (AuthToken) {
+    console.log(dataUser.AuthToken);
+    if (dataUser.AuthToken) {
       setAnchorElUser(event.currentTarget);
     }
   };
@@ -61,6 +61,9 @@ export const Layout = () => {
 
       token: localStorage.getItem("token")
     }
+
+    dataUser.setusername("")
+
     const response = await axios.put(url, input)
 
     const result = await response.data
@@ -113,8 +116,9 @@ export const Layout = () => {
                   color: "inherit",
                   textDecoration: "none",
                 }}
+                onClick={() => navigate("/")}
               >
-                LOGO
+                {dataUser.username ? dataUser.username : "User"}
               </Typography>
 
               <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

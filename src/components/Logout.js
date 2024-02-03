@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { popUp } from "../Helper";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserContext from "./UserContext";
 
 export const Logout = () => {
   const token = localStorage.getItem("token")
   const [isLoading, setisLoading] = useState(false);
   const navigate = useNavigate()
+  const datauser = useContext(UserContext)
   const handleSubmit = () => {
     debugger;
     setisLoading(true);
@@ -29,6 +31,7 @@ export const Logout = () => {
 
       token: token
     }
+    datauser.setusername("")
     const response = await axios.put(url, input)
 
     const result = await response.data
