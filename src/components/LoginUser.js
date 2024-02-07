@@ -21,8 +21,8 @@ export const LoginUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
-  const userLogin = useSelector((state) => state.userLogin)
-  const {loading, error, userInfo} = userLogin
+  // const userLogin = useSelector((state) => state.userLogin)
+  // const {loading, error, userInfo} = userLogin
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const data = useContext(UserContext)
