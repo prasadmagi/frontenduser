@@ -8,12 +8,13 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const DeleteUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isLoading, setisLoading] = useState(false);
-
+  const navigate = useNavigate()
   const handlesubmit = async (e) => {
     debugger;
     e.preventDefault();
@@ -28,6 +29,7 @@ export const DeleteUser = () => {
 
     let result = await response.data;
     setisLoading(false);
+    
     console.log(result, "deleteUser");
 
     if (result.msgId === -1) {
@@ -44,6 +46,8 @@ export const DeleteUser = () => {
         icons: "success",
         title: "Success",
       }).then((event) => {
+        localStorage.clear()
+        navigate("/")
         if (event.isConfirmed) {
         }
         return;

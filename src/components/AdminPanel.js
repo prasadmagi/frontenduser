@@ -25,7 +25,7 @@ export const AdminPanel = () => {
   const dataUser = useContext(UserContext);
   const {isAdmin} = useSelector((state)=>state.auth)
   console.log(dataUser, "dataUser");
-  if (isAdmin !== "Yes") {
+  if (dataUser.isAdmin !== "Yes") {
 
     popUp({ message: "User is Not Admin", icons: "error", title: "Error" }).then((event) => {
       if (event.isConfirmed) {

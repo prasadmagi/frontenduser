@@ -15,6 +15,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import { useSelector, useDispatch } from "react-redux";
 import { createUser } from "../redux/authActions";
+import { useNavigate } from "react-router-dom";
 
 export const CreateUser = () => {
   debugger
@@ -26,6 +27,7 @@ export const CreateUser = () => {
   const passwordref = useRef(null)
   const { loading, message, msgId } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const handlesubmit = (e) => {
     debugger;
     e.preventDefault();
@@ -63,6 +65,7 @@ export const CreateUser = () => {
         icons: "success",
         title: "Success",
       }).then((event) => {
+        navigate("/LoginUser")
         if (event.isConfirmed) {
         }
         return;
