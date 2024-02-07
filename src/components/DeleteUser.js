@@ -9,11 +9,13 @@ import {
   TextField,
 } from "@mui/material";
 import UserContext from "./UserContext";
+import { useNavigate } from "react-router-dom";
 export const DeleteUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const datauser = useContext(UserContext)
+  const navigate = useNavigate()
   const handlesubmit = async (e) => {
     debugger;
     e.preventDefault();
