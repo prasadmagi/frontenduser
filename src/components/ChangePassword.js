@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { popUp } from "../Helper";
 import {
   Button,
@@ -9,12 +9,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import UserContext from "./UserContext";
 export const ChangePassword = () => {
   const [name, setname] = useState("");
   const [oldpassword, setoldpassword] = useState("");
   const [newpassword, setnewpassword] = useState("");
   const [isLoading, setisLoading] = useState(false);
+  const datauser = useContext(UserContext)
   const handleSubmit = (e) => {
     debugger;
     setisLoading(true);
@@ -58,6 +59,11 @@ export const ChangePassword = () => {
     setoldpassword("")
     setnewpassword("")
   };
+
+  useEffect(() => {
+    let username = datauser.username
+    setname(username)
+  }, [datauser])
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
 
   return (
@@ -76,19 +82,20 @@ export const ChangePassword = () => {
       ) : (
 
         <Paper elevation={8} style={paperStyle}>
-        <Grid align="center">
-          <h2>Change User Passsword</h2>
-          <Grid sx={{margin:"1rem"}}>
-          <TextField
+          <Grid align="center">
+            <h2>Change User Passsword</h2>
+            <Grid sx={{ margin: "1rem" }}>
+              <TextField
                 value={name}
                 onChange={(e) => setname(e.target.value)}
                 id="outlined-basic"
                 label="Name"
                 variant="outlined"
+                disabled={true}
               />
-          </Grid>
-          <Grid sx={{margin:"1rem"}}>
-               <TextField
+            </Grid>
+            <Grid sx={{ margin: "1rem" }}>
+              <TextField
                 value={oldpassword}
                 onChange={(e) => setoldpassword(e.target.value)}
                 id="outlined-basic"
@@ -96,9 +103,9 @@ export const ChangePassword = () => {
                 label="Old Password"
                 variant="outlined"
               />
-          </Grid>
-          <Grid sx={{margin:"1rem"}}>
-                <TextField
+            </Grid>
+            <Grid sx={{ margin: "1rem" }}>
+              <TextField
                 value={newpassword}
                 onChange={(e) => setnewpassword(e.target.value)}
                 id="outlined-basic"
@@ -106,9 +113,9 @@ export const ChangePassword = () => {
                 label="New Password"
                 variant="outlined"
               />
-          </Grid>
-          <Grid sx={{margin:"1rem"}}>
-               <Button
+            </Grid>
+            <Grid sx={{ margin: "1rem" }}>
+              <Button
                 variant="contained"
                 color="primary"
                 type="submit"
@@ -118,30 +125,12 @@ export const ChangePassword = () => {
               >
                 Submit
               </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </Paper>
+        </Paper>
       )}
 
-      {/* <div>
-      <h2>Change the Password </h2>
-      <input
-        value={name}
-        onChange={(e) => setname(e.target.value)}
-        placeholder="Enter Name"
-      />
-      <input
-        value={oldpassword}
-        onChange={(e) => setoldpassword(e.target.value)}
-        placeholder="Enter Old Password"
-      />
-      <input
-        value={newpassword}
-        onChange={(e) => setnewpassword(e.target.value)}
-        placeholder="Enter New Password"
-      />
-      <button onClick={handleSubmit}>Submit</button>
-    </div> */}
+
     </>
   );
 };

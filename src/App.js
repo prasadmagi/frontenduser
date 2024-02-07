@@ -18,10 +18,10 @@ import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const [user, setuser] = useState("");
-  const [isAdminUser, setisAdminUser] = useState(false);
+  const [isAdminUser, setisAdminUser] = useState("");
   let token = localStorage.getItem('token')
   return (
-    <UserContext.Provider value={{ username: user, setusername: setuser, AuthToken: token, isAdminUser:isAdminUser, setisAdminUser:setisAdminUser }}>
+    <UserContext.Provider value={{ username: user, setusername: setuser, AuthToken: token, isAdminUser: isAdminUser, setisAdminUser: setisAdminUser }}>
       <div className="App">
         {/* <Test/> */}
 

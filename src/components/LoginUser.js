@@ -25,7 +25,7 @@ export const LoginUser = () => {
   const {loading, error, userInfo} = userLogin
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  // const data = useContext(UserContext)
+  const data = useContext(UserContext)
   let token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -124,7 +124,6 @@ export const LoginUser = () => {
         setisloading(false);
         console.log(resp, "resp");
         let result = resp.data;
-
         console.log(result, "loginUser");
         debugger;
         if (result.msgId === -1) {
@@ -138,6 +137,8 @@ export const LoginUser = () => {
             return;
           });
         } else if (result.msgId === 0) {
+          data.setisAdminUser(result.isAdmin)
+          data.setusername(result.user)
           popUp({
             message: result.message,
             icons: "success",
@@ -164,9 +165,9 @@ export const LoginUser = () => {
 
     // let result = await response.data;
   };
-  const handleClear = ()=> { 
+  const handleClear = () => {
     debugger
-   
+
   }
   const paperStyle = { padding: 20, height: '70vh', width: 280, margin: "20px auto" }
   return (
@@ -196,7 +197,7 @@ export const LoginUser = () => {
                   id="outlined-basic"
                   label="Name"
                   variant="outlined"
-                
+
                 />
               </Grid>
               <Grid align="center" sx={{ margin: "1rem" }} >
@@ -207,7 +208,7 @@ export const LoginUser = () => {
                   id="outlined-basic"
                   label="Password"
                   variant="outlined"
-                 
+
                 />
               </Grid>
               <Grid align="center" sx={{ margin: "1rem" }}>
@@ -221,7 +222,7 @@ export const LoginUser = () => {
                 >
                   Submit
                 </Button>
-     
+
 
               </Grid>
             </Grid>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { popUp } from "../Helper";
 import {
   Button,
@@ -8,13 +8,12 @@ import {
   Paper,
   TextField,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-
+import UserContext from "./UserContext";
 export const DeleteUser = () => {
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isLoading, setisLoading] = useState(false);
-  const navigate = useNavigate()
+  const datauser = useContext(UserContext)
   const handlesubmit = async (e) => {
     debugger;
     e.preventDefault();
@@ -62,6 +61,11 @@ export const DeleteUser = () => {
     width: 280,
     margin: "20px auto",
   };
+  useEffect(() => {
+    debugger
+    let username = datauser.username
+    setname(username)
+  }, [])
   return (
     <div>
       {isLoading ? (
@@ -88,6 +92,7 @@ export const DeleteUser = () => {
                 id="outlined-basic"
                 label="Name"
                 variant="outlined"
+                disabled={true}
               />
             </Grid>
             <Grid sx={{ margin: "1rem" }}>
