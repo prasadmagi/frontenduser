@@ -13,14 +13,16 @@ import {
 import Paper from '@mui/material/Paper';
 import UserContext from "./UserContext";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/authActions";
+import { login } from "../redux/actions/userActions";
+// import { loginUser } from "../redux/authActions";
 
 export const LoginUser = () => {
   debugger;
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
   const [isloading, setisloading] = useState(false);
-  const { userName, userToken, success, message, msgId, user, loading } = useSelector((state) => state.auth)
+  // const userLogin = useSelector((state) => state.userLogin)
+  // const {loading, error, userInfo} = userLogin
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const data = useContext(UserContext)
@@ -61,7 +63,7 @@ export const LoginUser = () => {
       });
       return;
     } else {
-      if (userToken) {
+      if (token) {
         popUp({
           message: "User Already Login",
           icons: "error",
@@ -78,30 +80,35 @@ export const LoginUser = () => {
       }
     }
   };
-  const handlesubmit1 = () => {
-    debugger
-    const data = {
-      name: name,
-      password: password
-    }
-    dispatch(loginUser(data))
-    if (msgId === 0) {
-      popUp({ message: message, icons: "success", title: "Success" }).then((event) => {
-        if (event.isConfirmed) {
+  // const handlesubmit1 = () => {
+  //   debugger
+  //   const data = {
+  //     name: name,
+  //     password: password
+  //   }
+  //   dispatch(loginUser(data))
+  //   if (msgId === 0) {
+  //     popUp({ message: message, icons: "success", title: "Success" }).then((event) => {
+  //       if (event.isConfirmed) {
 
-        }
-      })
-      return
-    } else if (msgId === -1) {
-      popUp({ message: message, icons: "error", title: "Error" }).then((event) => {
-        if (event.isConfirmed) {
+  //       }
+  //     })
+  //     return
+  //   } else if (msgId === -1) {
+  //     popUp({ message: message, icons: "error", title: "Error" }).then((event) => {
+  //       if (event.isConfirmed) {
 
-        }
-        return
-      })
-    }
-    console.log(userName, "user");
-  }
+  //       }
+  //       return
+  //     })
+  //   }
+  //   console.log(userName, "user");
+  // }
+
+  // const handlesubmit2 = ()=> {
+  //   debugger
+  //   dispatch(login(name,password))
+  // }
   const loginApiCall = async () => {
     debugger;
     // let url = window.REACT_APP_URL+"loginUser";
