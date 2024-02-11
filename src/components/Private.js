@@ -75,21 +75,11 @@ export const Private = () => {
     setisloading(false)
     console.log(result1, "fetchusersata");
 
-    if (result1.msgId === -1) {
-      popUp({ message: result1.message, icons: "error", title: "Error" }).then((event) => {
-        if (event.isConfirmed) {
-
-        }
-        return
-      })
-    } else {
+    if (result1.msgId === 0) {
       setuserdata(result1.data[0]?.data)
-      popUp({ message: result1.message, icons: "error", title: "Error" }).then((event) => {
-        if (event.isConfirmed) {
+    } else {
 
-        }
-        return
-      })
+
 
     }
 
