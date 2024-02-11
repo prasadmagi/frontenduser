@@ -70,7 +70,7 @@ export const Private = () => {
       name: username
     }
 
-    let response1 = await axios.get(url1, input)
+    let response1 = await axios.post(url1, input)
     let result1 = await response1.data
     setisloading(false)
     console.log(result1, "fetchusersata");
@@ -82,6 +82,15 @@ export const Private = () => {
         }
         return
       })
+    } else {
+      setuserdata(result1.data[0]?.data)
+      popUp({ message: result1.message, icons: "error", title: "Error" }).then((event) => {
+        if (event.isConfirmed) {
+
+        }
+        return
+      })
+
     }
 
 
